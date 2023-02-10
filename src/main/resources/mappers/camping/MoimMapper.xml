@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.campong.moim.mapper.MoimMapper">
+
+<resultMap type="com.multi.campong.moim.vo.Moim" id="MoimMap">
+		<id property="meetNo" column="MEET_NO"/>
+		<result property="contentId" column="CONTENTID"/>
+		<result property="title" column="TITLE"/>
+		<result property= "apes" column= "APES"/>
+		<result property= "introduction" column= "INTRODUCTION"/>
+		<result property= "status" column= "STATUS"/>
+		<result property= "startDate" column= "STARTDATE"/>
+		<result property= "endDate" column= "ENDDATE"/>
+		<result property= "ageRange" column= "AGERANGE"/>
+		<result property= "minExpense" column= "MINEXPENSE"/>
+		<result property= "maxExpense" column= "MAXEXPENSE"/>
+		<result property= "phone" column= "PHONE"/>
+</resultMap>
+
+
+	<insert id="moimInsert" parameterType="com.multi.campong.moim.vo.Moim">
+		INSERT INTO MEETING(
+		MEET_NO ,CONTENTID ,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , MINEXPENSE, MAXEXPENSE, PHONE
+		) VALUES(
+		0,1,#{title} , #{apes}, #{introduction},DEFAULT,"1",#{endDate} ,#{ageRange} ,#{minExpense} , #{maxExpense} ,#{phone}
+		)	
+	</insert>
+
+
+
+
+</mapper> 
