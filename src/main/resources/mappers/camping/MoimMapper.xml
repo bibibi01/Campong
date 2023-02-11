@@ -5,6 +5,8 @@
 <resultMap type="com.multi.campong.moim.vo.Moim" id="MoimMap">
 		<id property="meetNo" column="MEET_NO"/>
 		<result property="contentId" column="CONTENTID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="gender" column="GENDER"/>
 		<result property="title" column="TITLE"/>
 		<result property= "apes" column= "APES"/>
 		<result property= "introduction" column= "INTRODUCTION"/>
@@ -19,12 +21,22 @@
 
 
 	<insert id="moimInsert" parameterType="com.multi.campong.moim.vo.Moim">
+		
 		INSERT INTO MEETING(
-		MEET_NO ,CONTENTID ,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , MINEXPENSE, MAXEXPENSE, PHONE
-		) VALUES(
-		0,1,#{title} , #{apes}, #{introduction},DEFAULT,"1",#{endDate} ,#{ageRange} ,#{minExpense} , #{maxExpense} ,#{phone}
-		)	
+		MEET_NO ,CONTENTID ,NICKNAME,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , MINEXPENSE, MAXEXPENSE, PHONE,
+		GENDER
+		) VALUES(0,1,#{nickName},#{title},#{apes},#{introduction},DEFAULT,"1",#{endDate} ,#{ageRange} ,#{minExpense} , #{maxExpense} ,#{phone},#{gender}
+		)
 	</insert>
+	
+	<select id="getMoim" resultMap="MoimMap">
+		select 
+			* FROM MEETING
+	</select>
+	
+	<select id="MoimContent" parameterType="int" resultMap="MoimMap" resultType="com.multi.campong.moim.vo.Moim">
+		SELECT * FROM MEETING where MEET_NO=#{meetNo};
+	</select>
 
 
 

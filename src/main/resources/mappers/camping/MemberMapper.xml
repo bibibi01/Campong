@@ -8,7 +8,7 @@
 		<result property="password" column="PASSWORD" />
 		<result property="birthYear" column="BIRTHYEAR" />
 		<result property="role" 	column="ROLE" />
-		<result property="name" 	column="NICKNAME" />
+		<result property="nickName" 	column="NICKNAME" />
 		<result property="phone" 	column="PHONE" />
 		<result property="email1" 	column="EMAIL1" />
 		<result property="email2" 	column="EMAIL2" />
@@ -41,7 +41,7 @@
 			STATUS, ENROLL_DATE, MODIFY_DATE
 		) VALUES (
 			 0, #{id}, #{password},
-			 #{birthYear}, #{name}, #{phone},
+			 #{birthYear}, #{nickName}, #{phone},
 			 DEFAULT,
 			 #{email1},#{email2}, #{address},DEFAULT,
 			 DEFAULT, DEFAULT, DEFAULT)

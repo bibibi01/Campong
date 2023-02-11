@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Moim {
 	private int meetNo;
-	private String name;
+	private String nickName;
+	private String gender;
 	private String contentId;
 	private String title;
-	private String apes;
+	private int apes;
 	private String introduction;
 	private String status;
 	private String startDate;

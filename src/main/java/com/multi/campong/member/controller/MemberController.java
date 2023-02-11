@@ -28,8 +28,10 @@ public class MemberController {
 	MemberMapper mapper;
 
 	@GetMapping("/sign.in")
-	public String singIn() {
-
+	public String singIn(HttpSession session,Member m) {
+		Member mvo = mapper.registerCheck(m.getId());
+		System.out.println(m.getId());
+		session.setAttribute("mvo", mvo);
 		return "sign/sign-in";
 	}
 
@@ -62,7 +64,7 @@ public class MemberController {
 	
 	 @GetMapping("/memRegister.do") public String memRegister(Member m,	  RedirectAttributes attr, HttpSession session) { //RedirectAttributes는 값을 한번만 다시전달해줌 
 		 if(m.getId()==null || m.getId().equals("") || m.getPassword()==null || m.getPassword().equals("") 
-				 ||	  m.getName()==null || m.getBirthYear()==null || m.getBirthYear().equals("") || m.getEmail1()==null ||m.getEmail2().equals("") ||
+				 ||	  m.getNickName()==null || m.getBirthYear()==null || m.getBirthYear().equals("") || m.getEmail1()==null ||m.getEmail2().equals("") ||
 				 m.getPhone()==null || m.getPhone().equals("") || m.getAddress()==null || m.getAddress().equals("")) {
 	  attr.addFlashAttribute("msgType","실패 메세지");
 	  attr.addFlashAttribute("msg","모든 내용을 입력해주세요"); return "redirect:/sign.up";
@@ -100,6 +102,8 @@ public class MemberController {
 			 rttr.addFlashAttribute("msgType", "성공 메세지");
 			 rttr.addFlashAttribute("msg", "로그인에 성공했습니다.");
 			 session.setAttribute("mvo", mvo);
+			 session.setAttribute("m", m);
+			 System.out.println(mvo);
 			 return "redirect:/";
 		 }else {
 			 rttr.addFlashAttribute("msgType", "실패 메세지");

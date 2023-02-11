@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>Booking - Multipurpose Online Booking Theme</title>
@@ -61,6 +61,14 @@
 					<div class="col-12 mt-3 border-bottom">
 						<h3 class="d-inline-block" style="color: #9D7EE0;">캠핑모집</h3><h3 class="d-inline-block ps-3"> 등록</h3>
 					</div>
+					<!--연락처 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>작성자</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<input class="contact" name="nickName" type="text" th:value="${session.mvo.nickName}" readonly/>
+					</div>
+					<!--연락처 끝-->
 					<!--제목 시작-->
 					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
 						<p>제목</p>
@@ -75,10 +83,10 @@
 					</div>
 					<div class="col-11 mt-3 border-bottom">
 						<select class="select" name="apes">
-							<option value="3명">3명</option>
-							<option value="4명">4명</option>
-							<option value="5명">5명</option>
-							<option value="6명">6명</option>
+							<option value=3>3명</option>
+							<option value=4>4명</option>
+							<option value=5>5명</option>
+							<option value=6>6명</option>
 						</select>
 					</div>
 					<!--모집인원 끝-->
@@ -96,6 +104,18 @@
 							<option value="60대">60대</option>
 							<option value="70대">70대</option>
 							<option value="나이무관">나이무관</option>
+						</select>
+					</div>
+					<!--모집나이 끝-->
+					<!--모집나이 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>모집나이</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<select class="select" name="gender">
+							<option value="남녀무관">남녀무관</option>
+							<option value="남자모임">남자모임</option>
+							<option value="여자모임">여자모임</option>
 						</select>
 					</div>
 					<!--모집나이 끝-->
