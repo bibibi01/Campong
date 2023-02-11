@@ -75,7 +75,7 @@ public class PageInfo {
 		return endPage > getMaxPage() ? getMaxPage() : endPage;
 	}	
 	
-
+	
 	/**
 	 * 
 	 * @return 이전 페이지
@@ -113,4 +113,5 @@ public class PageInfo {
 		
 		return endList > this.listCount ? this.listCount : endList;
 	}
+	
 }
