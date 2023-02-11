@@ -28,8 +28,8 @@ public class ShoppingService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public Shopping findByNo(int productId) {
-		Shopping Shopping = mapper.selectShoppingByNo(productId); 
+	public Shopping findByNo(int pno) {
+		Shopping Shopping = mapper.selectShoppingByNo(pno); 
 		return Shopping; 
 	}
 	

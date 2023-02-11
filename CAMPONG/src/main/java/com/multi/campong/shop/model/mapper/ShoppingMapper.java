@@ -11,5 +11,5 @@ import com.multi.campong.shop.model.vo.Shopping;
 public interface ShoppingMapper {
 	List<Shopping> selectShoppingList(Map<String, Object> map);
 	int selectShoppingCount(Map<String, Object> map);
-	Shopping selectShoppingByNo(int productId);
+	Shopping selectShoppingByNo(int pno);
 }

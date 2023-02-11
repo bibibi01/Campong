@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shopping {
+	private String pno;
 	private String title;
 	private String link;
 	private String image;
@@ -17,7 +18,6 @@ public class Shopping {
 	private String productId;
 	private String productType;
 	private String brand;
-	private String maker;
 	private String category1;
 	private String category2;
 	private String category3;

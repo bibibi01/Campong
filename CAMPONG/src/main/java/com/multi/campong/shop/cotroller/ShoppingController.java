@@ -28,7 +28,8 @@ public class ShoppingController {
 
 	@GetMapping("/shopping")
 	public String shopping(Model model, @RequestParam Map<String, String> paramMap,
-			@RequestParam(required = false) List<String> CheckItem) {
+			@RequestParam(required = false) List<String> CheckItem,
+			@RequestParam(required = false) List<String> CheckBrand){
 		int page = 1;
 
 		// 탐색할 맵을 선언
@@ -48,12 +49,18 @@ public class ShoppingController {
 		if (CheckItem == null) {
 			CheckItem = new ArrayList<>();
 		}
+		
+		searchMap.put("CheckBrand", CheckBrand);
+		if (CheckBrand == null) {
+			CheckBrand = new ArrayList<>();
+		}
 
 		int shoppingCount = service.getShoppingCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, shoppingCount, 12);
 		List<Shopping> list = service.getShoppingList(pageInfo, searchMap);
 
 		model.addAttribute("CheckItem", CheckItem);
+		model.addAttribute("CheckBrand", CheckBrand);
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
