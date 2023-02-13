@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>캠퐁</title>
@@ -74,8 +74,7 @@
 												<img class="avatar-img rounded-circle border border-2 border-white"
 													src="assets/images/account/01.jpg" alt="">
 											</div>
-											<h6 class="mb-0">전도연</h6>
-											<a href="#" class="text-reset text-primary-hover small">hello@gmail.com</a>
+											<h6 class="mb-0" th:text="${session.mvo.nickName}"></h6>
 											<hr>
 										</div>
 
@@ -154,130 +153,33 @@
 															<!-- Table head -->
 															<thead class="table-light">
 																<tr>
-																	<th scope="col" class="border-0"
-																		style="width: 40%;">이름</th>
-																	<th scope="col" class="border-0"
-																		style="width: 15%;">날짜</th>
-																	<th scope="col" class="border-0"
-																		style="width: 15%;">명수</th>
-																	<th scope="col" class="border-0"
-																		style="width: 15%;">최대비용</th>
-																	<th scope="col" class="action border-0 rounded-end"
-																		style="width: 15%; padding-left:0px;">Action</th>
+																	<th scope="col" class="border-0" style="width: 40%;">이름</th>
+																	<th scope="col" class="border-0" style="width: 15%;">날짜</th>
+																	<th scope="col" class="border-0" style="width: 15%;">명수</th>
+																	<th scope="col" class="border-0" style="width: 15%;">비용</th>
+																	<th scope="col" class="action border-0 rounded-end" style="width: 15%; padding-left:0px;">Action</th>
 																</tr>
 															</thead>
 
 															<!-- Table body START -->
 															<tbody class="border-top-0">
 																<!-- Table item -->
-																<tr>
+																<tr  th:each="myMoim : ${myMoim}" th:if="${myMoim != ''}">
 																	<td>
-																		<h6 class="mb-0"><a href="#">가평캠핑</a></h6>
+																		<h6 class="mb-0"><a href="#"  th:text="${myMoim.title}" th:if="${myMoim.title !=null}">가평캠핑</a></h6>
 																	</td>
-																	<td> 2023-02-04 </td>
+																	<td  th:text="${myMoim.endDate}"> 2023-02-04 </td>
 																	<td>
-																		<h6 class="mb-0 fw-light">10명</h6>
+																		<h6 class="mb-0 fw-light"  th:text="${myMoim.apes}" th:if="${myMoim.apes !=null}">10명</h6>
 																	</td>
 																	<td>
-																		<h6 class="mb-0 fw-light">200000</h6>
+																		<h6 class="mb-0 fw-light"  th:text="${myMoim.expense}" th:if="${myMoim.expense !=null}">200000</h6>
 																	</td>
 																	<td> <a href="#"
-																			class="btn btn-sm btn-light mb-0">자세히보기</a>
+																			class="btn btn-sm btn-light mb-0" th:href="@{/moim.detail(meetNo=${myMoim.meetNo})}">자세히보기</a>
 																	</td>
 																</tr>
-																<!-- Table item -->
-																<tbody class="border-top-0">
-																	<!-- Table item -->
-																	<tr>
-																		<td>
-																			<h6 class="mb-0"><a href="#">가평캠핑</a></h6>
-																		</td>
-																		<td> 2023-02-04 </td>
-																		<td>
-																			<h6 class="mb-0 fw-light">10명</h6>
-																		</td>
-																		<td>
-																			<h6 class="mb-0 fw-light">200000</h6>
-																		</td>
-																		<td> <a href="#"
-																				class="btn btn-sm btn-light mb-0">자세히보기</a>
-																		</td>
-																	</tr>
-																	<!-- Table item -->
-																	<tbody class="border-top-0">
-																		<!-- Table item -->
-																		<tr>
-																			<td>
-																				<h6 class="mb-0"><a href="#">가평캠핑</a></h6>
-																			</td>
-																			<td> 2023-02-04 </td>
-																			<td>
-																				<h6 class="mb-0 fw-light">10명</h6>
-																			</td>
-																			<td>
-																				<h6 class="mb-0 fw-light">200000</h6>
-																			</td>
-																			<td> <a href="#"
-																					class="btn btn-sm btn-light mb-0">자세히보기</a>
-																			</td>
-																		</tr>
-																		<!-- Table item -->
-																		<tbody class="border-top-0">
-																			<!-- Table item -->
-																			<tr>
-																				<td>
-																					<h6 class="mb-0"><a href="#">가평캠핑</a></h6>
-																				</td>
-																				<td> 2023-02-04 </td>
-																				<td>
-																					<h6 class="mb-0 fw-light">10명</h6>
-																				</td>
-																				<td>
-																					<h6 class="mb-0 fw-light">200000</h6>
-																				</td>
-																				<td> <a href="#"
-																						class="btn btn-sm btn-light mb-0">자세히보기</a>
-																				</td>
-																			</tr>
-																			<!-- Table item -->
-																			<tbody class="border-top-0">
-																				<!-- Table item -->
-																				<tr>
-																					<td>
-																						<h6 class="mb-0"><a href="#">가평캠핑 가평캠핑 가평캠핑 갑니다</a></h6>
-																					</td>
-																					<td> 2023-02-04 </td>
-																					<td>
-																						<h6 class="mb-0 fw-light">10명</h6>
-																					</td>
-																					<td>
-																						<h6 class="mb-0 fw-light">200000</h6>
-																					</td>
-																					<td> <a href="#"
-																							class="btn btn-sm btn-light mb-0">자세히보기</a>
-																					</td>
-																				</tr>
-																				<!-- Table item -->
-																				<tbody class="border-top-0">
-																					<!-- Table item -->
-																					<tr>
-																						<td>
-																							<h6 class="mb-0"><a href="#">가평캠핑</a></h6>
-																						</td>
-																						<td> 2023-02-04 </td>
-																						<td>
-																							<h6 class="mb-0 fw-light">10명</h6>
-																						</td>
-																						<td>
-																							<h6 class="mb-0 fw-light">200000</h6>
-																						</td>
-																						<td> <a href="#"class="btn btn-sm btn-light mb-0">자세히보기</a>
-																						</td>
-																										<!-- Table item -->
-																	</tr>
-															
-
-															</tbody>
+																
 															<!-- Table body END -->
 														</table>
 													</div>

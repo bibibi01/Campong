@@ -14,8 +14,7 @@
 		<result property= "startDate" column= "STARTDATE"/>
 		<result property= "endDate" column= "ENDDATE"/>
 		<result property= "ageRange" column= "AGERANGE"/>
-		<result property= "minExpense" column= "MINEXPENSE"/>
-		<result property= "maxExpense" column= "MAXEXPENSE"/>
+		<result property= "expense" column= "EXPENSE"/>
 		<result property= "phone" column= "PHONE"/>
 </resultMap>
 
@@ -23,9 +22,9 @@
 	<insert id="moimInsert" parameterType="com.multi.campong.moim.vo.Moim">
 		
 		INSERT INTO MEETING(
-		MEET_NO ,CONTENTID ,NICKNAME,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , MINEXPENSE, MAXEXPENSE, PHONE,
+		MEET_NO ,CONTENTID ,NICKNAME,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , EXPENSE, PHONE,
 		GENDER
-		) VALUES(0,1,#{nickName},#{title},#{apes},#{introduction},DEFAULT,"1",#{endDate} ,#{ageRange} ,#{minExpense} , #{maxExpense} ,#{phone},#{gender}
+		) VALUES(0,1,#{nickName},#{title},#{apes},#{introduction},DEFAULT,"1",#{endDate} ,#{ageRange} ,#{expense} ,#{phone},#{gender}
 		)
 	</insert>
 	
@@ -34,11 +33,11 @@
 			* FROM MEETING
 	</select>
 	
-	<select id="MoimContent" parameterType="int" resultMap="MoimMap" resultType="com.multi.campong.moim.vo.Moim">
+	<select id="MoimContent" parameterType="int" resultMap="MoimMap">
 		SELECT * FROM MEETING where MEET_NO=#{meetNo};
 	</select>
 
-
+	
 
 
 </mapper> 

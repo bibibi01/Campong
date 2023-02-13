@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Moim {
 	private int meetNo;
+	private int mNo;
 	private String nickName;
 	private String gender;
 	private String contentId;
@@ -20,7 +21,6 @@ public class Moim {
 	private String startDate;
 	private String endDate;
 	private String ageRange;
-	private String minExpense;
-	private String maxExpense;
+	private String expense;
 	private String phone;
 }

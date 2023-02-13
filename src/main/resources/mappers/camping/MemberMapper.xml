@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.campong.member.mapper.MemberMapper">
 
-	<resultMap type="Member" id="memberResultMap">
+	<resultMap type="com.multi.campong.member.vo.Member" id="memberMap">
 		<id 	property="mNo" 		column="USER_NO" />
 		<result property="id" 		column="ID" />
 		<result property="password" column="PASSWORD" />
@@ -20,12 +20,12 @@
 	</resultMap>
 
 
-	<select id="registerCheck" resultType="com.multi.campong.member.vo.Member">
+	<select id="registerCheck" resultMap="memberMap">
 		select * from MEMBER where ID=#{id}
 	</select>
 	
-		<select id="registerCheckName" resultType="com.multi.campong.member.vo.Member">
-		select * from MEMBER where NICKNAME=#{name}
+		<select id="registerCheckName" resultMap="memberMap">
+		select * from MEMBER where NICKNAME=#{nickName}
 	</select>
 	
 	<!-- <insert id="register" parameterType="com.multi.campong.member.vo.Member">
@@ -46,8 +46,7 @@
 			 #{email1},#{email2}, #{address},DEFAULT,
 			 DEFAULT, DEFAULT, DEFAULT)
 		</insert>
-		<select id="login" parameterType="com.multi.campong.member.vo.Member" resultType="com.multi.campong.member.vo.Member">
-		
+		<select id="login" parameterType="com.multi.campong.member.vo.Member" resultMap="memberMap">
 		select * from MEMBER where ID=#{id} and PASSWORD=#{password}
 		</select>
 	

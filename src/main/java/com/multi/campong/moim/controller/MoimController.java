@@ -40,10 +40,6 @@ public class MoimController {
 		return "/moim/moim-detail";
 	}
 
-	@GetMapping("/moim.my")
-	public String moimMy() {
-		return "moim/moim-my";
-	}
 
 	@PostMapping("/moim.insert")
 	public String moimInsert(Moim m) {

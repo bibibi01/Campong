@@ -106,12 +106,7 @@ Main banner START -->
 									<div class="item-condition"  th:text="${list.gender}" style="color:black;">남자모임</div>
 									<div class="item-condition"  th:text="${list.apes+'명'}" style="color:black;"></div>
 									<div class="people mt-3">
-									
-										<img class="peopleimg" src="assets/campongimg/peopleO.png">
-										<img class="peopleimg" src="assets/campongimg/peopleO.png">
-										<img class="peopleimg" src="assets/campongimg/peopleX.png">
-										<img class="peopleimg" src="assets/campongimg/peopleX.png">
-										<img class="peopleimg" src="assets/campongimg/peopleX.png">
+										<img class="peopleimg" src="assets/campongimg/peopleO.png"  th:each='num: ${#numbers.sequence(1,list.apes)}'>
 										<img class="peopleimg" src="assets/campongimg/peopleX.png">
 									</div>
 									<div class="item-date mt-3" th:text="${'모집기간 : '+ list.endDate +'일까지'}"  style="color:black;"></div>

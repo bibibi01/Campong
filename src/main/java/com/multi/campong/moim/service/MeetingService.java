@@ -25,19 +25,22 @@ public class MeetingService {
 	@Autowired
 	MeetingMapper meetingMapper;
 	
-	public List<MoimMapper> MoimListByUserNo(int mNo){
+	public List<Integer> MoimListByUserNo(int mNo){
 		// 참가한모임 목록 조회
-		List<MeetingMember> meetingList = meetingMapper.getMeetingByNo(mNo);
-		//참가한 모임의 정보 조회
-		List<Moim> moim = new ArrayList<Moim>();
-		// 찜한목록  확인
-		if(Objects.isNull(meetingList)) {
-		return null;	
-		}
-		meetingList.forEach( i-> {
-			Moim moimVo = moimMapper.MoimContent(i.getUserNo())
-		}
-		);
+		List<Integer> meetingList = meetingMapper.getMeetingByNo(mNo);
+		
+		
+		return meetingList;
+		/*
+		 * //참가한 모임의 정보 조회 List<Moim> moim = new ArrayList<Moim>(); // 찜한목록 확인
+		 * if(Objects.isNull(meetingList)) { return null; } meetingList.forEach( i-> {
+		 * Moim moimVo = moimMapper.MoimContent(i.getMNo()); } );
+		 */
+	}
+
+
+	public Moim MoimListByMeetNo(int hasNext) {
+		return null;
 	}
 
 }

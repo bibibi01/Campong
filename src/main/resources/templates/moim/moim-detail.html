@@ -10,16 +10,7 @@
 	<meta name="author" content="Webestica.com">
 	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
 
-	<!-- Dark mode -->
-	<script type="text/javascript">
-		var theme = localStorage.getItem('data-theme');
-		var root = document.documentElement;
-		if (theme === 'dark' && theme !== undefined) {
-			root.classList.add('dark-mode');
-		} else {
-			root.classList.remove('dark-mode');
-		}
-	</script>
+	
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -47,32 +38,62 @@
 		
 	<!-- SUIT 폰트 추가-->
 	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
-
-
+	
+	
 </head>
 
 <body>
-		
 
 	<header th:replace="~{common/layout :: #header}"></header>
-
+	
+		<!-- Dark mode -->
+	<script th:inline="javascript">
+	function moimRegisterCheck(){
+		var mNo = [[${session.mvo.mNo}]];
+		var meetNo = [[${vo.meetNo}]];
+		$.ajax({
+			url : "/moimRegisterCheck.do()",
+			type : "get",
+			data : {"mNo" : mNo , "meetNo": meetNo},
+			success : function(result){
+				if(result==1){
+					alert("가입이되었습니다.")
+				}else{
+					alert("가입인원이 초과했습니다.");
+				}
+			},
+			error : function(){alert("error");}
+			
+		});
+	}
+	
+	</script>
 	<!-- **************** MAIN CONTENT START **************** -->
 	<main>
 
 
 		<!-- -->
 		<section class="pt-2 pt-lg-2 mb-0 mt-5">
+		<form action="insertMeeting" method="post">
 			<div class="container position-relative">
 				<div class="row mt-4">
 					<div class="col-12 mt-3 border-bottom">
 						<h3  th:text="${vo.title}">제목 들어갈 칸</h3>
 					</div>
+					<!--작성자 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>작성자</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<div class="" th:text="${vo.nickName}">몇명</div>
+					</div>
+					<!-- 작성자끝 -->
 					<!--모집인원 시작-->
 					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
 						<p>모집인원</p>
 					</div>
 					<div class="col-11 mt-3 border-bottom">
-						<div class="" th:text="${vo.apes}+'명'">몇명</div>
+						<span>몇명</span>/<span class=""  th:text="${vo.apes}+'명'">몇명</span>
 					</div>
 					<!--모집인원 끝-->
 					<!--모집나이 시작-->
@@ -104,8 +125,7 @@
 						<p>예상 경비</p>
 					</div>
 					<div class="col-11 mt-3 border-bottom">
-						<span  th:text="${vo.minExpense}">20000</span>원~
-						<span  th:text="${vo.maxExpense}">30000</span>원
+						<span  th:text="${vo.expense}">20000</span>원
 					</div>
 					<!--예상 금액 끝-->
 					<!--세부내용 입력 시작 -->
@@ -123,7 +143,11 @@
 				</div>
 				<div class="registration my-2 text-center">
 					<a href="/moim" type="button" class="goList me-3">목록</a>
-					<input type="submit" href="#" class="goSubmit" value="가입하기"></input>
+					<input type="hidden" name="meetNo" th:value="${vo.meetNo}"/>
+					<input type="hidden"  name="mNo" th:value="${session.mvo.mNo}" />
+					<!-- 모임에 가입되어 있지 않으면-->
+					<input type="submit" class="goSubmit" id="GoMoim" th:value="가입하기" onclick="moimRegisterCheck()" />
+					
 				</div>
 			</div>
 			<div>
@@ -131,6 +155,7 @@
 
 				</button>
 			</div>
+		</form>
 
 		</section>
 

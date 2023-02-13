@@ -2,6 +2,7 @@ package com.multi.campong.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +38,7 @@ public class MemberController {
 
 	@GetMapping("/sign.up")
 	public String singUp() {
-
+		
 		return "sign/sign-up";
 	}
 
@@ -74,7 +75,11 @@ public class MemberController {
 	if(result ==1) {
 	  attr.addFlashAttribute("msgType","성공 메세지");
 	  attr.addFlashAttribute("msg","회원가입에 성공했습니다."); //로그인 처리
-	  session.setAttribute("mvo", m); //${!empty mvo}로 나중에 체크함
+	  session.setAttribute("m", m); //${!empty mvo}로 나중에 체크함
+	  Member mvo1 = mapper.login(m);
+	  System.out.println(m);
+	  System.out.println(mvo1);
+	  session.setAttribute("mvo", mvo1);
 	  return "redirect:/";
 	  }else { attr.addFlashAttribute("msgType","실패 메세지");
 	  attr.addFlashAttribute("msg","이미 존재하는 회원입니다."); 
@@ -90,7 +95,7 @@ public class MemberController {
 	 }
 	 
 	 @PostMapping("/memLogin.do")
-	 public String memLogin(Member m,RedirectAttributes rttr, HttpSession session) {
+	 public String memLogin(Member m,RedirectAttributes rttr, HttpSession session,Model model) {
 		 if(m.getId()==null || m.getId().equals("")||
 			m.getPassword()==null || m.getPassword().equals("")	) {
 			 rttr.addFlashAttribute("msgType", "실패 메세지");
@@ -101,8 +106,9 @@ public class MemberController {
 		 if(mvo!=null) {
 			 rttr.addFlashAttribute("msgType", "성공 메세지");
 			 rttr.addFlashAttribute("msg", "로그인에 성공했습니다.");
-			 session.setAttribute("mvo", mvo);
+			 model.addAttribute("list", m);
 			 session.setAttribute("m", m);
+			 session.setAttribute("mvo", mvo);
 			 System.out.println(mvo);
 			 return "redirect:/";
 		 }else {
