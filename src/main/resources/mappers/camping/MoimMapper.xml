@@ -19,7 +19,7 @@
 </resultMap>
 
 
-	<insert id="moimInsert" parameterType="com.multi.campong.moim.vo.Moim">
+	<insert id="moimInsert" parameterType="com.multi.campong.moim.vo.Moim" useGeneratedKeys="true" keyProperty="meetNo">
 		
 		INSERT INTO MEETING(
 		MEET_NO ,CONTENTID ,NICKNAME,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , EXPENSE, PHONE,

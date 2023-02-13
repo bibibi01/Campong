@@ -61,7 +61,7 @@
 			var id=$("#id").val();
 			$.ajax({
 				url: "/registerCheck.do",
-				type:"get",
+				type:"post",
 				data : {"id": id},
 				success : function(result){
 					if(result==1){

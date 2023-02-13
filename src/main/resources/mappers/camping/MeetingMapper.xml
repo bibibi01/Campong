@@ -40,4 +40,8 @@
 	select * FROM MEETING where MEET_NO=#{meetNo}
 </select>
 
+<select id="moimRegisterCheck" resultMap="MoimMap">
+	select * from MEETINGMEMBER where MEET_NO=#{meetNo} and USER_NO=#{mNo}
+</select>
+
 </mapper>

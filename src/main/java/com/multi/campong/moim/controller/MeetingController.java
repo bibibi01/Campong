@@ -32,16 +32,25 @@ public class MeetingController {
 		return "moim/moim-my";
 	}
 	@PostMapping("/insertMeeting")
-	public String insertMeeting(MeetingMember mt) {
+	public String insertMeeting(MeetingMember mt,@RequestParam(value="mNo") int mNo,@RequestParam(value="meetNo") int meetNo,Model model) {
 		System.out.println(mt);
+		MeetingMember m = mapper.moimRegisterCheck(mNo, meetNo);
+		if(m== null) {
 		mapper.insertMoim(mt);
+		model.addAttribute("message","가입이완료 되었습니다.");
+		}else {
+			model.addAttribute("message","이미 가입된 모임입니다.");
+		}
 		return "redirect:/moim";
 	}
 	
-	@GetMapping("/moimRegisterCheck.do")
-	public @ResponseBody int moimRegisterCheck(@RequestParam("mNo") int mNo,@RequestParam("meetNo") int meetNo) {
-		
-		return 1;
-	}
+	/*
+	 * @GetMapping("/moimRegisterCheck") public @ResponseBody int
+	 * moimRegisterCheck(@RequestParam(value = "mNo") String mNo,@RequestParam(value
+	 * = "meetNo") String meetNo) { System.out.println(mNo);
+	 * System.out.println(meetNo); MeetingMember m =
+	 * mapper.moimRegisterCheck(mNo,meetNo); if(m == null ) { return 0; }else {
+	 * return 1; } }
+	 */
 	
 }
