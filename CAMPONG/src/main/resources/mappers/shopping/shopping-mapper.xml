@@ -23,25 +23,49 @@
 		<if test="title != null">
 			AND TITLE LIKE '%${title}%'
 		</if>
+		<if test="lPrice != null">
+			AND LPRICE LIKE '%${lPrice}%'
+		</if>
+		<if test="hPrice != null">
+			AND HPRICE LIKE '%${hPrice}%'
+		</if>
 		
-		<if test="CheckItem != null">
+		<if test="Item != null">
 			AND (
-			<foreach collection="CheckItem" item="item" separator="or">
+			<foreach collection="Item" item="item" separator="or">
 				CATEGORY3 LIKE '%${item}%'
 			</foreach>
 			)
 		</if>
-				
-		<if test="CheckBrand != null ">
-			AND (
-			<foreach collection="CheckBrand" item="brand" separator="or">
+		<choose>
+		<when test="Brand != null">
+		AND (
+			<foreach collection="Brand" item="brand" separator="or">
 				BRAND LIKE '%${brand}%'
 			</foreach>
 			)
-		</if>
+		</when>
+		<when test="OtherBrand != null">
+		AND (
+			<foreach collection="OtherBrand" item="brand" separator="or">
+					BRAND NOT LIKE '%코베아%'
+				AND	BRAND NOT LIKE '%엘바운드%'
+				AND BRAND NOT LIKE '%로티캠프%'
+				AND BRAND NOT LIKE '%크레모아%'
+				AND BRAND NOT LIKE '%브리즈문%'
+				AND BRAND NOT LIKE '%씨투써밋%'
+				AND BRAND NOT LIKE '%네이처하이크%'
+				AND BRAND NOT LIKE '%캥거%'
+				AND BRAND NOT LIKE '%카나모%'
+				AND BRAND NOT LIKE '%헬리녹스%'
+				AND BRAND NOT LIKE '%루아즈%'
+			</foreach>
+			)
+		</when>
+		</choose>
 		ORDER BY PNO ASC LIMIT ${limit} OFFSET ${offset}
 	</select>
-
+	
 	<select id="selectShoppingCount" resultType="int" parameterType="map">
 		SELECT COUNT(DISTINCT PNO)
 		FROM SHOP
@@ -49,22 +73,46 @@
 		<if test="title != null">
 			AND TITLE LIKE '%${title}%'
 		</if>
+		<if test="lPrice != null">
+			AND LPRICE LIKE '%${lPrice}%'
+		</if>
+		<if test="hPrice != null">
+			AND HPRICE LIKE '%${hPrice}%'
+		</if>
 		
-		<if test="CheckItem != null">
+		<if test="Item != null">
 			AND (
-			<foreach collection="CheckItem" item="item" separator="or">
+			<foreach collection="Item" item="item" separator="or">
 				CATEGORY3 LIKE '%${item}%'
 			</foreach>
 			)
 		</if>
-		
-		<if test="CheckBrand != null ">
-			AND (
-			<foreach collection="CheckBrand" item="brand" separator="or">
+		<choose>
+		<when test="Brand != null">
+		AND (
+			<foreach collection="Brand" item="brand" separator="or">
 				BRAND LIKE '%${brand}%'
 			</foreach>
 			)
-		</if>
+		</when>
+		<when test="OtherBrand != null">
+		AND (
+			<foreach collection="OtherBrand" item="brand" separator="or">
+					BRAND NOT LIKE '%코베아%'
+				AND	BRAND NOT LIKE '%엘바운드%'
+				AND BRAND NOT LIKE '%로티캠프%'
+				AND BRAND NOT LIKE '%크레모아%'
+				AND BRAND NOT LIKE '%브리즈문%'
+				AND BRAND NOT LIKE '%씨투써밋%'
+				AND BRAND NOT LIKE '%네이처하이크%'
+				AND BRAND NOT LIKE '%캥거%'
+				AND BRAND NOT LIKE '%카나모%'
+				AND BRAND NOT LIKE '%헬리녹스%'
+				AND BRAND NOT LIKE '%루아즈%'
+			</foreach>
+			)
+		</when>
+		</choose>
 	</select>
 
 </mapper>

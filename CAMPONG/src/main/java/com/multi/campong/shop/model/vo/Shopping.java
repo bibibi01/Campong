@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shopping {
-	private String pno;
+	private int pno;
 	private String title;
 	private String link;
 	private String image;

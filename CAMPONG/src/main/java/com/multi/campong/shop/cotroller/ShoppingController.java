@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,11 +26,12 @@ public class ShoppingController {
 
 	@Autowired
 	private ShoppingService service;
-
+	
 	@GetMapping("/shopping")
 	public String shopping(Model model, @RequestParam Map<String, String> paramMap,
-			@RequestParam(required = false) List<String> CheckItem,
-			@RequestParam(required = false) List<String> CheckBrand){
+			@RequestParam(required = false) List<String> Item, 
+			@RequestParam(required = false) List<String> Brand,
+			@RequestParam(required = false) List<String> OtherBrand) {
 		int page = 1;
 
 		// 탐색할 맵을 선언
@@ -40,27 +42,39 @@ public class ShoppingController {
 			if (searchValue != null && searchValue.length() > 0) {
 				searchMap.put("title", searchValue);
 			}
+			if (searchValue != null && searchValue.length() > 0) {
+				searchMap.put("lPrice", searchValue);
+			}
+			if (searchValue != null && searchValue.length() > 0) {
+				searchMap.put("hPrice", searchValue);
+			}
 
 			page = Integer.parseInt(paramMap.get("page"));
 		} catch (Exception e) {
 		}
-		
-		searchMap.put("CheckItem", CheckItem);
-		if (CheckItem == null) {
-			CheckItem = new ArrayList<>();
+
+		searchMap.put("Item", Item);
+		if (Item == null) {
+			Item = new ArrayList<>();
 		}
-		
-		searchMap.put("CheckBrand", CheckBrand);
-		if (CheckBrand == null) {
-			CheckBrand = new ArrayList<>();
+
+		searchMap.put("Brand", Brand);
+		if (Brand == null) {
+			Brand = new ArrayList<>();
+		}
+
+		searchMap.put("OtherBrand", OtherBrand);
+		if (OtherBrand == null) {
+			OtherBrand = new ArrayList<>();
 		}
 
 		int shoppingCount = service.getShoppingCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, shoppingCount, 12);
 		List<Shopping> list = service.getShoppingList(pageInfo, searchMap);
 
-		model.addAttribute("CheckItem", CheckItem);
-		model.addAttribute("CheckBrand", CheckBrand);
+		model.addAttribute("Item", Item);
+		model.addAttribute("Brand", Brand);
+		model.addAttribute("OtherBrand", OtherBrand);
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
@@ -68,10 +82,11 @@ public class ShoppingController {
 
 		return "shop/shopping";
 	}
-
+	
 	@GetMapping("/shopping-basket")
-	public String basket(Model model, @RequestParam Map<String, String> paramMap) {
-
+	public String shopping(Model model, @RequestParam Map<String, String> paramMap) {
+		
 		return "shop/shopping-basket";
 	}
+
 }

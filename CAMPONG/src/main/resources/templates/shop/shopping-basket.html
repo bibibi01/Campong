@@ -5,7 +5,6 @@
 <th:block th:replace="~{common/layout :: head}"></th:block>
 
 <link rel="stylesheet" type="text/css"	th:href="@{/assets/css/shopping-basket.css}">
-
 <link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/aos/aos.css}">
 </head>
 
@@ -27,8 +26,7 @@
 							<!-- Offcanvas header -->
 							<div class="offcanvas-header justify-content-end pb-2">
 								<button type="button" class="btn-close"
-									data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar"
-									aria-label="Close"></button>
+									data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
 							</div>
 
 							<!-- Offcanvas body -->
@@ -112,10 +110,18 @@
 									</div>
 									<!-- Button -->
 									<button class="btn btn-danger-soft me-3">
-										<i class="fas fa-trash pe-2"></i>전체 삭제
+										<i class="fas fa-trash pe-2"></i>
+										전체 삭제
 									</button>
 								</form>
 								<!--장바구니 아이템시작-->
+								<th:block th:if="${list.size == 0}">
+									<div>
+										<h6>장바구니가 비었습니다.</h6>
+									</div>
+								</th:block>
+								<th:block th:if="${list.size != 0}">
+									<th:block th:each="shop : ${list}">
 								<div class="border-top border-bottom my-3">
 									<!-- 장바구니아이템 1 -->
 									<div class="container">
@@ -128,19 +134,18 @@
 												<!-- 상품 체크 끝-->
 												<!-- 상품이미지 -->
 												<div class="item-image py-2">
-													<img th:src="@{/assets/images/category/hotel/4by3/10.jpg}">
+													<img th:src="@{${shop.image}}">
 												</div>
 												<!--상품이미지 끝-->
 											</div>
 											<!-- 상품내용 -->
 											<div class="col-md-6">
 												<div class="border-bottom my-3">
-													<h6 class="subtitle fw-bold">코멧 아웃도어 캠핑 폴딩 카트 + 수납
-														가방세트</h6>
+													<h6 class="subtitle fw-bold">[[${shop.title}]]</h6>
 												</div>
 												<!--상품 가격-->
 												<div class="col-md-3 item-price">
-													<h5 class="subtitle fw-bold">12,800원</h5>
+													<h5 class="subtitle fw-bold">￦ 가격</h5>
 												</div>
 												<!--상품 가격 끝-->
 												<!-- 상품 수량-->
@@ -149,6 +154,7 @@
 													<option>2</option>
 													<option>3</option>
 													<option>4</option>
+													<option>5</option>
 												</select>
 												<!-- 상품 수량 끝-->
 											</div>
@@ -160,179 +166,6 @@
 										</div>
 									</div>
 									<!-- 장바구니아이템 1 끝 -->
-									<!-- 장바구니아이템 1 -->
-									<div class="container border-top">
-										<div class="row">
-											<div class="col-md-3">
-												<!-- 상품 체크 -->
-												<div class="check-item 1 pe-2">
-													<input type="checkbox" name="checkboxs" />
-												</div>
-												<!-- 상품 체크 끝-->
-												<!-- 상품이미지 -->
-												<div class="item-image py-2">
-													<img th:src="@{/assets/images/category/hotel/4by3/10.jpg}">
-												</div>
-												<!--상품이미지 끝-->
-											</div>
-											<!-- 상품내용 -->
-											<div class="col-md-6">
-												<div class="border-bottom my-3">
-													<h6 class="subtitle fw-bold">코멧 아웃도어 캠핑 폴딩 카트 + 수납
-														가방세트</h6>
-												</div>
-												<!--상품 가격-->
-												<div class="col-md-3 item-price">
-													<h5 class="subtitle fw-bold">12,800원</h5>
-												</div>
-												<!--상품 가격 끝-->
-												<!-- 상품 수량-->
-												<select class="item-amount ms-2">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-												</select>
-												<!-- 상품 수량 끝-->
-											</div>
-											<div class="item-total col-md-3">
-												<h5 class="total-price mt-4">12,800원</h5>
-												<button class="order">주문하기</button>
-												<button class="delete">삭제</button>
-											</div>
-										</div>
-									</div>
-									<!-- 장바구니아이템 1 끝 -->
-									<!-- 장바구니아이템 1 -->
-									<div class="container border-top">
-										<div class="row">
-											<div class="col-md-3">
-												<!-- 상품 체크 -->
-												<div class="check-item 1 pe-2">
-													<input type="checkbox" name="checkboxs" />
-												</div>
-												<!-- 상품 체크 끝-->
-												<!-- 상품이미지 -->
-												<div class="item-image py-2">
-													<img th:src="@{/assets/images/category/hotel/4by3/10.jpg}">
-												</div>
-												<!--상품이미지 끝-->
-											</div>
-											<!-- 상품내용 -->
-											<div class="col-md-6">
-												<div class="border-bottom my-3">
-													<h6 class="subtitle fw-bold">코멧 아웃도어 캠핑 폴딩 카트 + 수납
-														가방세트</h6>
-												</div>
-												<!--상품 가격-->
-												<div class="col-md-3 item-price">
-													<h5 class="subtitle fw-bold">12,800원</h5>
-												</div>
-												<!--상품 가격 끝-->
-												<!-- 상품 수량-->
-												<select class="item-amount ms-2">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-												</select>
-												<!-- 상품 수량 끝-->
-											</div>
-											<div class="item-total col-md-3">
-												<h5 class="total-price mt-4">12,800원</h5>
-												<button class="order">주문하기</button>
-												<button class="delete">삭제</button>
-											</div>
-										</div>
-									</div>
-									<!-- 장바구니아이템 1 끝 -->
-									<!-- 장바구니아이템 1 -->
-									<div class="container border-top">
-										<div class="row">
-											<div class="col-md-3">
-												<!-- 상품 체크 -->
-												<div class="check-item 1 pe-2">
-													<input type="checkbox" name="checkboxs" />
-												</div>
-												<!-- 상품 체크 끝-->
-												<!-- 상품이미지 -->
-												<div class="item-image py-2">
-													<img th:src="@{/assets/images/category/hotel/4by3/10.jpg}">
-												</div>
-												<!--상품이미지 끝-->
-											</div>
-											<!-- 상품내용 -->
-											<div class="col-md-6">
-												<div class="border-bottom my-3">
-													<h6 class="subtitle fw-bold">코멧 아웃도어 캠핑 폴딩 카트 + 수납
-														가방세트</h6>
-												</div>
-												<!--상품 가격-->
-												<div class="col-md-3 item-price">
-													<h5 class="subtitle fw-bold">12,800원</h5>
-												</div>
-												<!--상품 가격 끝-->
-												<!-- 상품 수량-->
-												<select class="item-amount ms-2">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-												</select>
-												<!-- 상품 수량 끝-->
-											</div>
-											<div class="item-total col-md-3">
-												<h5 class="total-price mt-4">12,800원</h5>
-												<button class="order">주문하기</button>
-												<button class="delete">삭제</button>
-											</div>
-										</div>
-									</div>
-									<!-- 장바구니아이템 1 끝 -->
-									<!-- 장바구니아이템 1 -->
-									<div class="container border-top">
-										<div class="row">
-											<div class="col-md-3">
-												<!-- 상품 체크 -->
-												<div class="check-item 1 pe-2">
-													<input type="checkbox" name="checkboxs" />
-												</div>
-												<!-- 상품 체크 끝-->
-												<!-- 상품이미지 -->
-												<div class="item-image py-2">
-													<img th:src="@{/assets/images/category/hotel/4by3/10.jpg}">
-												</div>
-												<!--상품이미지 끝-->
-											</div>
-											<!-- 상품내용 -->
-											<div class="col-md-6">
-												<div class="border-bottom my-3">
-													<h6 class="subtitle fw-bold">코멧 아웃도어 캠핑 폴딩 카트 + 수납
-														가방세트</h6>
-												</div>
-												<!--상품 가격-->
-												<div class="col-md-3 item-price">
-													<h5 class="subtitle fw-bold">12,800원</h5>
-												</div>
-												<!--상품 가격 끝-->
-												<!-- 상품 수량-->
-												<select class="item-amount ms-2">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-												</select>
-												<!-- 상품 수량 끝-->
-											</div>
-											<div class="item-total col-md-3">
-												<h5 class="total-price mt-4">12,800원</h5>
-												<button class="order">주문하기</button>
-												<button class="delete">삭제</button>
-											</div>
-										</div>
-									</div>
-									<!-- 장바구니아이템 1 끝 -->
-
 								</div>
 								<!--장바구니 아이템끝-->
 								<!--주문하기-->
@@ -362,8 +195,6 @@
 
 	<!-- Vendors -->
 	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
-	<script th:src="@{/assets/vendor/choices/js/choices.min.js}"></script>
-	<script th:src="@{/assets/vendor/flatpickr/js/flatpickr.min.js}"></script>
 
 
 </body>
