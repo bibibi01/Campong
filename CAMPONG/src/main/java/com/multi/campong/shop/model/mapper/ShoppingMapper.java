@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.multi.campong.shop.model.vo.Basket;
 import com.multi.campong.shop.model.vo.Shopping;
 
 @Mapper
