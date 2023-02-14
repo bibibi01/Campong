@@ -1,6 +1,8 @@
 package com.multi.campong.moim.vo;
 
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ public class Moim {
 	private String gender;
 	private String contentId;
 	private String title;
+	private int nowApes;
 	private int apes;
 	private String introduction;
 	private String status;
@@ -23,4 +26,5 @@ public class Moim {
 	private String ageRange;
 	private String expense;
 	private String phone;
+	private int count;
 }

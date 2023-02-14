@@ -22,6 +22,7 @@
 		<result property= "ageRange" column= "AGERANGE"/>
 		<result property= "expense" column= "EXPENSE"/>
 		<result property= "phone" column= "PHONE"/>
+		<result property= "count" column= "COUNT"/>
 </resultMap>
 
 
@@ -43,5 +44,22 @@
 <select id="moimRegisterCheck" resultMap="MoimMap">
 	select * from MEETINGMEMBER where MEET_NO=#{meetNo} and USER_NO=#{mNo}
 </select>
+<select id="moimCountMember" resultType="int">
+SELECT count(*) FROM MEETINGMEMBER where MEET_NO=#{meetNo}
+</select>
 
+<select id="meetingCountByMeetNo" resultMap="MoimMap2">
+SELECT DISTINCT M.MEET_NO, M.*, (SELECT COUNT(*) from MEETINGMEMBER MM where MM.MEET_NO = M.MEET_NO) AS COUNT
+FROM MEETING M
+LEFT OUTER JOIN MEETINGMEMBER MM ON MM.MEET_NO = M.MEET_NO WHERE MM.MEET_NO=#{meetNo}
+</select>
+
+<select id="meetingCount" resultMap="MoimMap2">
+SELECT DISTINCT M.MEET_NO, M.*, (SELECT COUNT(*) from MEETINGMEMBER MM where MM.MEET_NO = M.MEET_NO) AS COUNT
+FROM MEETING M
+LEFT OUTER JOIN MEETINGMEMBER MM ON MM.MEET_NO = M.MEET_NO
+</select>
+<select id="moimCheck" resultType="int">
+SELECT COUNT(*) FROM MEETINGMEMBER WHERE MEET_NO=#{meetNo} AND USER_NO=#{mNo}
+</select>
 </mapper>

@@ -1,9 +1,13 @@
 package com.multi.campong.member.service;
 
+import java.io.File;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.campong.member.mapper.MemberMapper;
 import com.multi.campong.member.vo.Member;
@@ -30,6 +34,19 @@ public class MemberService {
 				result = mapper.updateMember(member);
 			}
 			return result;
+		}
+		
+		public void updateProfile(Member member, MultipartFile file) throws Exception{
+			String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload";
+			
+			UUID uuid = UUID.randomUUID();
+			
+			String fileName = uuid + "-" + file.getOriginalFilename();
+			
+			File saveFile = new File(projectPath, fileName);
+			
+			file.transferTo(saveFile);
+			
 		}
 
 }

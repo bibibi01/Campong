@@ -1,14 +1,16 @@
 package com.multi.campong.moim.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.campong.moim.mapper.MeetingMapper;
 import com.multi.campong.moim.service.MeetingService;
@@ -43,14 +45,32 @@ public class MeetingController {
 		}
 		return "redirect:/moim";
 	}
-	
+
+	@GetMapping("/moimRegisterCheck")
+	public ResponseEntity<Integer> moimCheck(int mNo, int meetNo) {
+		System.out.println("mNo : " + mNo);
+		System.out.println("meetNo : + " + meetNo);
+		MeetingMember m = new MeetingMember(meetNo,mNo);
+		System.out.println(mNo);
+		System.out.println(meetNo);
+		int result = mapper.moimCheck(meetNo, mNo);
+		if (result == 1) {
+			return new ResponseEntity<Integer>(1, HttpStatus.OK);
+		} else {
+			MeetingMember mvo = mapper.moimRegisterCheck(mNo, meetNo);
+			if(mvo==null) {
+				mapper.insertMoim(m);
+				return new ResponseEntity<Integer>(0, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Integer>(1, HttpStatus.OK);
+			}
+		}
+	}
 	/*
-	 * @GetMapping("/moimRegisterCheck") public @ResponseBody int
-	 * moimRegisterCheck(@RequestParam(value = "mNo") String mNo,@RequestParam(value
-	 * = "meetNo") String meetNo) { System.out.println(mNo);
-	 * System.out.println(meetNo); MeetingMember m =
-	 * mapper.moimRegisterCheck(mNo,meetNo); if(m == null ) { return 0; }else {
-	 * return 1; } }
+	 * @PostMapping("/moimOut") public String moimOut(int mNo,int meetNo) {
+	 * 
+	 * }
 	 */
+	 
 	
 }

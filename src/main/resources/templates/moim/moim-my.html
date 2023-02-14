@@ -35,12 +35,14 @@
 
 </head>
 
-<body class="dashboard">
-
+<body>
+	
+	<header th:replace="~{common/layout :: #header}"></header>
 	<main>
 
 		<section class="pt-3">
-			<div class="container">
+		
+			<div class="container mt-8">
 				<div class="row">
 
 					<!-- Sidebar START -->
@@ -81,7 +83,7 @@
 										<!-- Sidebar menu item START -->
 										<ul class="nav nav-pills-primary-soft flex-column">
 											<li class="nav-item">
-												<a class="nav-link" href="account-profile.html"><i
+												<a class="nav-link" th:href="@{/myprofile(mNo=${session.mvo.mNo})}"><i
 														class="bi bi-person fa-fw me-2"></i>회원정보</a>
 											</li>
 											<li class="nav-item">
@@ -97,7 +99,7 @@
 														class="fa-solid fa-car"></i>&nbsp&nbsp&nbsp교통예약</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link  active" href="#"><i
+												<a class="nav-link  active" th:href="@{/moim.my(mNo=${session.mvo.mNo})}"><i
 														class="bi bi-chat-left-dots"></i>&nbsp&nbsp&nbsp내 모임</a>
 											</li>
 											<li class="nav-item">
@@ -176,7 +178,7 @@
 																		<h6 class="mb-0 fw-light"  th:text="${myMoim.expense}" th:if="${myMoim.expense !=null}">200000</h6>
 																	</td>
 																	<td> <a href="#"
-																			class="btn btn-sm btn-light mb-0" th:href="@{/moim.detail(meetNo=${myMoim.meetNo})}">자세히보기</a>
+																			class="btn btn-sm btn-light mb-0" th:href="@{/moim.detail(meetNo=${myMoim.meetNo},mNo=${session.mvo.mNo})}">자세히보기</a>
 																	</td>
 																</tr>
 																
@@ -195,6 +197,9 @@
 
 						</div>
 					</div>
+					</div>
+					</div>
+					
 		</section>
 
 	</main>

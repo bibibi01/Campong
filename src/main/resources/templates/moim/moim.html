@@ -98,21 +98,22 @@ Main banner START -->
 				<div class="col-md-12 mt-3 pt-2">
 					<div class="row pt-2">
 						<div class="col-3" th:each="list : ${list}">
-							<a th:href="${'moim.detail?meetNo='+list.meetNo}">
+							
+							<a th:href="${'moim.detail?meetNo='+list.meetNo+'&mNo='+session.mvo.mNo}">
 								<div class="group-items shadow-sm">
 									<div class="item-content" >
 									<div class="item-name" th:text="${list.title}">가평 캠핑장</div>
 									<div class="item-condition" th:text="${list.ageRange}" style="color:black;">나이제한:20~29살</div>
 									<div class="item-condition"  th:text="${list.gender}" style="color:black;">남자모임</div>
-									<div class="item-condition"  th:text="${list.apes+'명'}" style="color:black;"></div>
 									<div class="people mt-3">
-										<img class="peopleimg" src="assets/campongimg/peopleO.png"  th:each='num: ${#numbers.sequence(1,list.apes)}'>
-										<img class="peopleimg" src="assets/campongimg/peopleX.png">
+										<img class="peopleimg" src="assets/campongimg/peopleO.png"  th:each='num: ${#numbers.sequence(list.apes-list.count,list.apes-1)}'>
+										<img class="peopleimg" src="assets/campongimg/peopleX.png" th:each='num: ${#numbers.sequence(1,list.apes-list.count)}' th:if="${list.apes !=list.count}">
 									</div>
 									<div class="item-date mt-3" th:text="${'모집기간 : '+ list.endDate +'일까지'}"  style="color:black;"></div>
 									</div>
 								</div>
 							</a>
+						
 						</div>
 						
 				</div>

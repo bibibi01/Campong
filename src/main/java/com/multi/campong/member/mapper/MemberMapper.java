@@ -13,5 +13,6 @@ public interface MemberMapper {
 	public Member registerCheckName(String name);
 	
 	//로그인
-	public Member login(Member member); 
+	public Member login(Member member);
+	public Member selectMemberByMno(int mNo); 
 }

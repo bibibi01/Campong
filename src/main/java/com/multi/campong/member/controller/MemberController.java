@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.multi.campong.member.mapper.MemberMapper;
@@ -43,7 +44,7 @@ public class MemberController {
 	}
 
 	
-	  @GetMapping("/registerCheck.do") public @ResponseBody int
+	  @PostMapping("/registerCheck.do") public @ResponseBody int
 	  memRegisterCheck(@RequestParam("id") String id) {
 		 Member m =	 mapper.registerCheck(id); 
 	  if(m !=null || id.equals("") || id.length()<=4) { 
@@ -118,6 +119,14 @@ public class MemberController {
 		 }
 	 }
 	 
+	 @GetMapping("/myprofile")
+	 public String myProfile(@RequestParam("mNo")int mNo) {
+		Member mem = mapper.selectMemberByMno(mNo);
+		System.out.println(mem);
+		 return "sign/myprofile";
+	 }
+	 
+	
 	/*
 	 * @PostMapping("/memRegister.do") public String create(@Valid @ModelAttribute
 	 * Member member, BindingResult result, Model model){

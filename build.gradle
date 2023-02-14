@@ -21,6 +21,9 @@ repositories {
 }
 
 dependencies {
+
+	// https://mvnrepository.com/artifact/com.servlets/cos
+	implementation group: 'com.servlets', name: 'cos', version: '09May2002'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -35,6 +38,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	
 }
 
 tasks.named('test') {

@@ -24,9 +24,9 @@ public class MoimController {
 	MeetingMapper meetMapper;
 	
 	@GetMapping("/moim")
-	public String moimMain(Model model) {
-		List<Moim> list = mapper.getMoim();
-		System.out.println(list);
+	public String moimMain(Model model,@RequestParam("mNo") int mNo) {
+		List<Moim> list = meetMapper.meetingCount();
+		System.out.println(mNo);
 		model.addAttribute("list", list);
 		return "moim/moim";
 	}
@@ -38,9 +38,22 @@ public class MoimController {
 	}
 
 	@GetMapping("/moim.detail")
-	public String moimDetail(@RequestParam("meetNo") int meetNo,Model model) {
+	public String moimDetail(@RequestParam("meetNo") int meetNo,@RequestParam("mNo") int mNo,Model model) {
 		Moim m = mapper.MoimContent(meetNo);
+		Moim mvo = meetMapper.meetingCountByMeetNo(meetNo);
+		System.out.println(m);
+		System.out.println(mvo);
 		model.addAttribute("vo", m);
+		model.addAttribute("mvo", mvo);
+		System.out.println("meetNo"+meetNo);
+		System.out.println("mNo"+mNo);
+		int result = meetMapper.moimCheck(meetNo, mNo);
+		System.out.println("result:"+result);
+		if(result==1) {
+			model.addAttribute("viewPhone", 1);
+		}else {
+			model.addAttribute("viewPhone", 0);
+		}
 		return "/moim/moim-detail";
 	}
 
