@@ -25,7 +25,4 @@ public interface MeetingMapper {/*
 	public Moim meetingCountByMeetNo(int meetNo);
 	public List<Moim> meetingCount();
 	public int moimCheck(@Param("meetNo") int meetNo,@Param("mNo") int mNo);
-	public int deleteMeeting(@Param("mNo") int mNo,@Param("meetNo") int meetNo);
-	public int deleteMeetingMoim(@Param("nickName")String nickName,@Param("meetNo") int meetNo);
-	public int deleteMoimFirst(@Param("meetNo")int meetNo);
 }

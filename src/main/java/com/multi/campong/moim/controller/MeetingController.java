@@ -66,30 +66,11 @@ public class MeetingController {
 			}
 		}
 	}
-	
-	  @GetMapping("/moimOut") 
-	  public ResponseEntity<Integer> moimOut(@RequestParam("mNo")int mNo,@RequestParam("meetNo")int meetNo) {
-		 int row = mapper.deleteMeeting(mNo,meetNo);
-		  if(row ==1) {
-
-				return new ResponseEntity<Integer>(1, HttpStatus.OK);
-		  }else {
-				return new ResponseEntity<Integer>(0, HttpStatus.OK);
-		  }
-	  }
-	  @GetMapping("/moimOutDeleted")
-			  public ResponseEntity<Integer> moimOutDelete(@RequestParam("mNo")int mNo,@RequestParam("meetNo")int meetNo,@RequestParam("nickName")String nickName) {
-
-			 int row = mapper.deleteMoimFirst(meetNo);
-			 int rows = mapper.deleteMeetingMoim(nickName,meetNo);
-			  if(rows ==1) {
-
-					return new ResponseEntity<Integer>(1, HttpStatus.OK);
-			  }else {
-					return new ResponseEntity<Integer>(0, HttpStatus.OK);
-			  }
-		  }
-	
+	/*
+	 * @PostMapping("/moimOut") public String moimOut(int mNo,int meetNo) {
+	 * 
+	 * }
+	 */
 	 
 	
 }

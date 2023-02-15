@@ -50,14 +50,13 @@
 	
 		<!-- Dark mode -->
 	<script th:inline="javascript">
-
 	function moimRegisterCheck(){
 		var mNo = [[${session.mvo.mNo}]];
 		var meetNo = [[${vo.meetNo}]];
 		requestUrl =  "/moimRegisterCheck?mNo=" + mNo +"&meetNo="+ meetNo;
 		
 		$.ajax({
-			method:'get',
+			method:'post',
 			url:requestUrl,
 			contentType: 'application/json',
 			dataType : 'json',
@@ -80,13 +79,8 @@
 			url:"moimOut",
 			Type:'get',
 			data: {"mNo":mNo, "meetNo":meetNo},
-			success: function(data){
-				if(data ==1){
-				alert("탈퇴가완료되었습니다.");
-				window.location.replace("/moim?mNo="+mNo);
-				}else{
-					alert("가입한 회원이아닙니다.")
-				}
+			success: function(){
+				alert("성공");
 			},
 			error: function(){
 				alert("error");
@@ -94,30 +88,6 @@
 			
 		});
 	}
-	
-	function  moimOutDeleted(){
-		var mNo = [[${session.mvo.mNo}]];
-		var meetNo = [[${vo.meetNo}]];
-		var nickName = [[${vo.nickName}]];
-		$.ajax({
-			url:"moimOutDeleted",
-			Type:'get',
-			data: {"mNo":mNo, "meetNo":meetNo,"nickName":nickName},
-			success: function(data){
-				if(data ==1){
-				alert("삭제가완료되었습니다.");
-				window.location.replace("/moim?mNo="+mNo);
-				}else{
-					alert("가입한 회원이아닙니다.")
-				}
-			},
-			error: function(){
-				alert("error");
-			}
-			
-		});
-	}
-	
 	</script>
 	<!-- **************** MAIN CONTENT START **************** -->
 	<main>
@@ -161,7 +131,6 @@
 					</div>
 					<div class="col-11 mt-3 border-bottom">
 						<div th:text="${vo.phone}" th:if=${viewPhone==1}>010-xxxx-xxxx</div>
-						<div th:if=${viewPhone!=1}>연락처는 가입후에 공개됩니다.</div>
 					</div>
 					<!--연락처 끝-->
 					<!--모집 기간 시작 -->
@@ -198,10 +167,9 @@
 					<input type="hidden" name="meetNo" th:value="${vo.meetNo}"/>
 					<input type="hidden"  name="mNo" th:value="${session.mvo.mNo}" />
 					<!-- 모임에 가입되어 있지 않으면-->
-					<input type="submit" class="goSubmit me-3" id="GoMoim" th:value="가입하기" onclick="moimRegisterCheck()"  th:if="${mvo.count !=vo.apes}" th:unless="${viewPhone==1}" />
+					<input type="submit" class="goSubmit me-3" id="GoMoim" th:value="가입하기" onclick="moimRegisterCheck()"  th:if="${mvo.count !=vo.apes}"/>
 					<input type="button" class="goSubmit me-3" id="GoMoim" th:value="정원초과"  th:if="${mvo.count ==vo.apes}" />
-					<input type="button" class="goList me-3 fw-bold" id="GoMoim" th:value="삭제하기" style="color:red; background-color:white;" onclick="moimOutDeleted()"  th:if="${viewPhone==1 and vo.nickName== session.mvo.nickName}"/>
-					<input type="button" class="goList me-3 fw-bold" id="GoMoim" th:value="탈퇴하기" style="color:red; background-color:white;" onclick="moimOut()"  th:if="${viewPhone==1}" th:unless="${vo.nickName== session.mvo.nickName}"/>
+					<input type="button" class="goList me-3 fw-bold" id="GoMoim" th:value="탈퇴하기" style="color:red; background-color:white;" onclick="moimOut()"  th:if="${mvo.count ==vo.apes}"/>
 				</div>
 			</div>
 					<!-- <!-- The Modal -->
