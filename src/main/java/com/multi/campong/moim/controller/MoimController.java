@@ -66,7 +66,7 @@ public class MoimController {
 		mvo.setMeetNo(m.getMeetNo());
 		mvo.setMNo(mNo);
 		meetMapper.insertMoim(mvo);
-		return "redirect:/moim";
+		return "redirect:/moim?mNo="+mNo;
 	}
 
 }

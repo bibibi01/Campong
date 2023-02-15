@@ -62,4 +62,13 @@ LEFT OUTER JOIN MEETINGMEMBER MM ON MM.MEET_NO = M.MEET_NO
 <select id="moimCheck" resultType="int">
 SELECT COUNT(*) FROM MEETINGMEMBER WHERE MEET_NO=#{meetNo} AND USER_NO=#{mNo}
 </select>
+<delete id="deleteMeeting">
+	DELETE FROM MEETINGMEMBER WHERE USER_NO=#{mNo} AND  MEET_NO=#{meetNo} 
+</delete>
+<delete id="deleteMeetingMoim">
+	DELETE FROM MEETING WHERE NICKNAME=#{nickName} AND MEET_NO=#{meetNo};
+</delete>
+<delete id="deleteMoimFirst">
+	DELETE FROM MEETINGMEMBER WHERE MEET_NO =#{meetNo};
+</delete>
 </mapper>
